@@ -12,10 +12,10 @@ struct SearchResponse: Decodable {
 }
 
 /// for non explicit results filter everything before showing to user any content:
-extension SearchResponse {
-    var nonExplicitResults: [SearchResult] {
-        return self.results.filter { (result) in
-            result.trackExplicitness != .explicit
-        }
-    }
-}
+//extension SearchResponse {
+//    var nonExplicitResults: [SearchResult] {
+//        return self.results.filter { (result) in
+//            result.trackExplicitness != .explicit
+//        }
+//    }
+//}

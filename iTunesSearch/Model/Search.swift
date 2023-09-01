@@ -44,7 +44,7 @@ class SearchManager {
                 let decoder = JSONDecoder()
                 let searchResponse = try decoder.decode(SearchResponse.self, from: data)
                 
-                self.results = searchResponse.nonExplicitResults
+                self.results = searchResponse.results
             } catch {
                 fatalError("Decoding error \(error)")
             }

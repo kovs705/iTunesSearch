@@ -19,7 +19,7 @@ struct SearchResult: Decodable {
     let trackName: String?
     
     /// The explicitness of the track.
-    let trackExplicitness: Explicitness?
+//    let trackExplicitness: Explicitness?
     
     /// An iTunes Store URL for the content.
     let trackViewURL: URL?
@@ -44,13 +44,13 @@ struct SearchResult: Decodable {
 extension SearchResult {
     func artworkURL(size dimension: Int = 100) -> URL? {
         guard dimension > 0, dimension != 100,
-            var url = self.artworkURL100 else {
+              var url = self.artworkURL100 else {
             return self.artworkURL100
         }
-
+        
         url.deleteLastPathComponent()
         url.appendPathComponent("\(dimension)x\(dimension)bb.jpg")
-
+        
         return url
     }
 }
@@ -67,5 +67,38 @@ extension SearchResult {
         case collectionName
         case artworkURL100 = "artworkUrl100"
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        trackName = try container.decodeIfPresent(String.self, forKey: .trackName)
+        //        trackExplicitness = try container.decodeIfPresent(Explicitness.self, forKey: .trackExplicitness)
+        trackViewURL = try container.decodeIfPresent(URL.self, forKey: .trackViewURL)
+        previewURL = try container.decodeIfPresent(URL.self, forKey: .previewURL)
+        artistName = try container.decodeIfPresent(String.self, forKey: .artistName)
+        collectionName = try container.decodeIfPresent(String.self, forKey: .collectionName)
+        artworkURL100 = try container.decodeIfPresent(URL.self, forKey: .artworkURL100)
+    }
 }
-
+    
+//    init(from decoder: Decoder) throws {
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//
+//        self.trackName = try container.decodeIfPresent(String.self, forKey: .trackName)
+//        self.trackViewURL = try container.decodeIfPresent(URL.self, forKey: .trackViewURL)
+//        self.previewURL = try container.decodeIfPresent(URL.self, forKey: .previewURL)
+//        self.artistName = try container.decodeIfPresent(String.self, forKey: .artistName)
+//        self.collectionName = try container.decodeIfPresent(String.self, forKey: .collectionName)
+//        self.artworkURL100 = try container.decodeIfPresent(URL.self, forKey: .artworkURL100)
+//
+//        // Decode the explicitness value as a String
+//        let explicitnessString = try container.decode(String.self, forKey: .trackExplicitness)
+//
+//        // Initialize the trackExplicitness property based on the decoded String value
+//        if let explicitness = Explicitness(rawValue: explicitnessString) {
+//            self.trackExplicitness = explicitness
+//        } else {
+//            self.trackExplicitness = nil // or provide a default value
+//        }
+//    }
+//}
+        
