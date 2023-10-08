@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "appleitunessearchurlcomponents",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Flight-School/AppleiTunesSearchURLComponents",
+      "state" : {
+        "branch" : "master",
+        "revision" : "e2ff40a7f636d7903b3f9a518dee613f6b08fcc4"
+      }
+    }
+  ],
+  "version" : 2
+}
